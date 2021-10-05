@@ -58,7 +58,7 @@ public class Controller {
 	}
 	
 	public void moveUp() {
-		Game.player.positionUp(); 
+		game.moveUp();
 	}
 	
 	public void inputControl() {
