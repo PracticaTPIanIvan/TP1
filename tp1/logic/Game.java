@@ -12,6 +12,10 @@ public class Game {
 		this.player = new Player();
 	}
 	
+	public void moveUp() {
+		player.moveUp();	
+	}
+	
 	public void toggleTest() {
 		// TODO 
 	}
