@@ -13,7 +13,7 @@ public class Game {
 	}
 	
 	public void moveUp() {
-		player.moveUp();	
+		player.positionUp();	
 	}
 	
 	public void toggleTest() {
