@@ -24,6 +24,14 @@ public enum Level {
 
 	// TODO fill your code
 
+	public double getObstacleFrequency() {
+		return obstacleFrequency;
+	}
+	
+	public double getCoinFrequency() {
+		return coinFrequency;
+	}
+	
 	public static Level valueOfIgnoreCase(String inputString) {
 		for (Level level : Level.values()) {
 			if (level.name().equalsIgnoreCase(inputString)) {
