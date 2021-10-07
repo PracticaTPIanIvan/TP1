@@ -61,6 +61,10 @@ public class Controller {
 		game.moveUp();
 	}
 	
+	public void moveDown() {
+		game.moveDown();
+	}
+	
 	public void inputControl() {
 		switch (input) {
 		case "h":
@@ -86,13 +90,17 @@ public class Controller {
 		case "Q":
 		case "up":
 		case "Up":
+			if(game.getPlayerPositionY() > 0) {
 			moveUp();
+			}
 			break;
 		case "a":
 		case "A":
 		case "down":
 		case "Down":
-			//moveDown();
+			if(game.getPlayerPositionY() < game.getRoadWidth() - 1) {
+			moveDown();
+			}
 			break;
 		case "e":
 		case "E":
@@ -125,5 +133,3 @@ public class Controller {
 	}
 
 }
-
-
