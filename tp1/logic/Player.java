@@ -1,13 +1,28 @@
 package es.ucm.tp1.logic;
 
 public class Player {
-	private int position;
+	private int positionX;
+	private int positionY;
 	
 	public Player() {
-		this.position = 0;
+		this.positionX = 0;
+		this.positionY = 1;
+	}
+	
+	public int getPositionX() {
+		return positionX;
+	}
+	
+	public int getPositionY() {
+		return positionY;
 	}
 	
 	public void positionUp() {
-		this.position++;
+		this.positionY--;
+	}
+
+	public void positionDown() {
+		this.positionY++;
+		
 	}
 }
