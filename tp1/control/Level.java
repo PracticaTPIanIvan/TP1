@@ -23,7 +23,15 @@ public enum Level {
 	}
 
 	// TODO fill your code
+	
+	public int getLength() {
+		return length;
+	}
 
+	public int getWidth() {
+		return width;
+	}
+	
 	public double getObstacleFrequency() {
 		return obstacleFrequency;
 	}
