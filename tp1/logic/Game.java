@@ -1,5 +1,7 @@
 package es.ucm.tp1.logic;
 
+import java.util.Random;
+
 import es.ucm.tp1.control.Level;
 
 public class Game {
@@ -8,18 +10,31 @@ public class Game {
 	
 	private Level level;
 	
-	private Obstacle obstacle;
+	private Obstacle [] obstacleList;
 	
-	private int [] obstacleList;
+	private Coin [] coinList;
+	
+	private Random random;
 	
 	private static final String PLAYER_ICON = ">";
 	
 	private static final String OBSTACLE_ICON = "░";
+	
+	private static final String COIN_ICON = "¢";
+	
+	private int coinCount;
+	
+	private int obstacleCount;
 
-	public Game(long seed, Level level, int obstacleList) {
+	public Game(long seed, Level level) {
 		this.level = level;
 		this.player = new Player();
-		this.obstacleList = new int [2];
+		this.random = new Random(seed);
+		this.obstacleCount = 0;
+		this.obstacleList = new Obstacle [100];
+		this.coinCount = 0;
+		this.coinList = new Coin [100];
+		addElements();
 	}
 	
 	public int getPlayerPositionX() {
@@ -38,6 +53,10 @@ public class Game {
 		player.positionDown();
 	}
 	
+	public int getRandomLane() {
+		return random.nextInt(getRoadWidth());
+	}
+	
 	public void toggleTest() {
 		// TODO 
 	}
@@ -47,7 +66,7 @@ public class Game {
 	}
 	
 	public int getRoadWidth() {
-		return 3;
+		return level.getWidth();
 	}
 	
 	public double getObstacleFrequency() {
@@ -58,6 +77,39 @@ public class Game {
 		return level.getCoinFrequency();
 	}
 	
+	public boolean tryToAddObstacle(Obstacle obstacle, double frequency) {
+		if(random.nextDouble() < frequency) {
+			obstacleList[obstacleCount] = obstacle;
+			obstacleCount++;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/*public boolean tryToAddCoin(Coin coin, double frequency) {
+		if(random.nextDouble() < frequency) {
+			coinList[obstacleCount] = coin;
+			coinCount++;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}*/
+	
+	public void addElements() {
+		for (int x = getVisibility() / 2; x < level.getLength(); x++) {
+			tryToAddObstacle(new Obstacle(x, getRandomLane(), this),
+			getObstacleFrequency());
+			
+			/*tryToAddCoin(new Coin(x, getRandomLane(), this),
+			getCoinFrequency());*/
+		}
+
+	}
+	
 	public String getGameStatus() {
 		return "";
 	}
@@ -66,8 +118,33 @@ public class Game {
 		if(j == player.getPositionX() && i == player.getPositionY()) {
 			return PLAYER_ICON;
 		}
+		else if(obstaclePosition(j, i) != -1) {
+			return OBSTACLE_ICON;
+		}
+		/*else if(coinPosition(j, i) != -1) {
+			return COIN_ICON;
+		}*/
 		else {
 			return "";
 		}
 	}
-}
+	
+	public int obstaclePosition(int j, int i) {
+		int pos = -1;
+		for(int k = 0; k < obstacleCount; k++) {
+			if(obstacleList[k].getObstaclePositionX() == j && obstacleList[k].getObstaclePositionY() == i) {
+				pos = k;
+			}
+		}
+		return pos;
+	}
+	/*public int coinPosition(int j, int i) {
+		int position = -1;
+		for(int l = 0; l < coinCount; l++) {
+			if(coinList[l].getCoinPositionX() == j && coinList[l].getCoinPositionY() == i) {
+				position = l;
+			}
+		}
+		return position;
+	}*/
+	}
