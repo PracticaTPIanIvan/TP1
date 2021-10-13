@@ -14,10 +14,17 @@ public class Obstacle {
 	
 	private Random random;
 	
-	public Obstacle(int posX, int posY, int cont, Game game) {
+	public Obstacle(int posX, int posY, Game game) {
 		this.posX = posX;
 		this.posY = posY;
-		this.cont = cont;
 		this.game = game;
+	}
+	
+	public int getObstaclePositionX() {
+		return posX;
+	}
+	
+	public int getObstaclePositionY() {
+		return posY;
 	}
 }
