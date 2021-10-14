@@ -45,6 +45,22 @@ public class Game {
 		return player.getPositionY();
 	}
 	
+	public int getCoinCounter() {
+		return coinCount;
+	}
+	
+	public int getObstacleCounter() {
+		return obstacleCount;
+	}
+	
+	public int getPlayerCoins() {
+		return player.getCoins();
+	}
+	
+	public void advance() {
+		player.advance();
+	}
+	
 	public void moveUp() {
 		player.positionUp();	
 	}
@@ -58,7 +74,7 @@ public class Game {
 	}
 	
 	public void toggleTest() {
-		// TODO 
+		 
 	}
 	
 	public int getVisibility() {
@@ -67,6 +83,10 @@ public class Game {
 	
 	public int getRoadWidth() {
 		return level.getWidth();
+	}
+	
+	public int getRoadLength() {
+		return level.getLength();
 	}
 	
 	public double getObstacleFrequency() {
@@ -88,24 +108,24 @@ public class Game {
 		}
 	}
 	
-	/*public boolean tryToAddCoin(Coin coin, double frequency) {
+	public boolean tryToAddCoin(Coin coin, double frequency) {
 		if(random.nextDouble() < frequency) {
-			coinList[obstacleCount] = coin;
+			coinList[coinCount] = coin;
 			coinCount++;
 			return true;
 		}
 		else {
 			return false;
 		}
-	}*/
+	}
 	
 	public void addElements() {
 		for (int x = getVisibility() / 2; x < level.getLength(); x++) {
 			tryToAddObstacle(new Obstacle(x, getRandomLane(), this),
 			getObstacleFrequency());
 			
-			/*tryToAddCoin(new Coin(x, getRandomLane(), this),
-			getCoinFrequency());*/
+			tryToAddCoin(new Coin(x, getRandomLane(), this),
+			getCoinFrequency());
 		}
 
 	}
@@ -121,9 +141,9 @@ public class Game {
 		else if(obstaclePosition(j, i) != -1) {
 			return OBSTACLE_ICON;
 		}
-		/*else if(coinPosition(j, i) != -1) {
+		else if(coinPosition(j, i) != -1) {
 			return COIN_ICON;
-		}*/
+		}
 		else {
 			return "";
 		}
@@ -138,7 +158,7 @@ public class Game {
 		}
 		return pos;
 	}
-	/*public int coinPosition(int j, int i) {
+	public int coinPosition(int j, int i) {
 		int position = -1;
 		for(int l = 0; l < coinCount; l++) {
 			if(coinList[l].getCoinPositionX() == j && coinList[l].getCoinPositionY() == i) {
@@ -146,5 +166,6 @@ public class Game {
 			}
 		}
 		return position;
-	}*/
 	}
+}
+
