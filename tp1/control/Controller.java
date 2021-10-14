@@ -12,7 +12,13 @@ public class Controller {
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command";
 	
 	private String input;
-			
+	
+	boolean advance;
+	
+	boolean crash;
+	
+	boolean end;
+	
 	/* @formatter:off */
 	private static final String[] HELP = new String[] {
 		"Available commands:",
@@ -37,6 +43,8 @@ public class Controller {
 		this.game = game;
 		this.scanner = scanner;
 		this.printer = new GamePrinter(game);
+		crash = false;
+		end = false;
 	}
 
 	public void printGame() {
@@ -53,6 +61,18 @@ public class Controller {
 		return scanner.nextLine();
 	}
 	
+	public void checkCrash() {
+		if (game.obstaclePosition(game.getPlayerPositionX(), game.getPlayerPositionY()) != -1) {
+			crash = true;
+		}
+	}
+	
+	public void checkEnd() {
+		if (game.getPlayerPositionX() >= game.getRoadLength()) {
+			end = true;
+		}
+	}
+	
 	public void help() {
 		System.out.println(HELP);
 	}
@@ -66,18 +86,22 @@ public class Controller {
 	}
 	
 	public void inputControl() {
+		advance = true;
+		
 		switch (input) {
 		case "h":
 		case "H":
 		case "help":
 		case "Help":
 			help();
+			advance = false;
 			break;
 		case "i":
 		case "I":
 		case "info":
 		case "Info":
 			//info();
+			advance = false;
 			break;
 		case "n":
 		case "N":
@@ -120,16 +144,23 @@ public class Controller {
 		case "Test":
 			game.toggleTest();
 			break;
-			
-			
 		}
+		
+		
 	}
 
 	public void run() {
-		// TODO fill your code
-		input = userInput();
-		inputControl();
-		printGame();
+		while (!crash && !end) {
+			printGame();
+			input = userInput();
+			inputControl();
+			if (advance) {
+				game.advance();
+				checkCrash();
+				checkEnd();
+			}
+		}
+		System.out.println("Game Over");
 	}
 
 }
