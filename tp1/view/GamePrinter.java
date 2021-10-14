@@ -61,9 +61,11 @@ public class GamePrinter {
 
 
 	private String getInfo() {
-
-		// TODO add yout code
-		return "";
+	return "Distance: " + game.getPlayerPositionX() + "\n" +
+			"Coins: " + game.getPlayerCoins() + "\n" +
+			"Cicle: " + "0" + "\n" +
+			"Total Obstacles: " + game.getObstacleCounter() + "\n" +
+			"Total Coins: " + game.getCoinCounter() + "\n";
 	}
 
 	
@@ -84,7 +86,7 @@ public class GamePrinter {
 		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < game.getVisibility(); x++) {
-				str.append(StringUtils.centre(game.positionToString(x, y), CELL_SIZE))
+				str.append(StringUtils.centre(game.positionToString(x + game.getPlayerPositionX(), y), CELL_SIZE))
 						.append(verticalDelimiter);
 			}
 			if (y <  game.getRoadWidth() - 1) {
@@ -106,3 +108,4 @@ public class GamePrinter {
 		return s;
 	}
 }
+
