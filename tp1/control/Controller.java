@@ -13,11 +13,9 @@ public class Controller {
 	
 	private String input;
 	
-	boolean advance;
+	private boolean advance;
 	
-	boolean crash;
 	
-	boolean end;
 	
 	/* @formatter:off */
 	private static final String[] HELP = new String[] {
@@ -43,8 +41,6 @@ public class Controller {
 		this.game = game;
 		this.scanner = scanner;
 		this.printer = new GamePrinter(game);
-		crash = false;
-		end = false;
 	}
 
 	public void printGame() {
@@ -58,18 +54,12 @@ public class Controller {
 	
 	public String userInput() {
 		System.out.println(PROMPT);
-		return scanner.nextLine();
-	}
-	
-	public void checkCrash() {
-		if (game.obstaclePosition(game.getPlayerPositionX(), game.getPlayerPositionY()) != -1) {
-			crash = true;
-		}
+		return scanner.nextLine().toLowerCase();
 	}
 	
 	public void checkEnd() {
 		if (game.getPlayerPositionX() >= game.getRoadLength()) {
-			end = true;
+			game.setWin(true);
 		}
 	}
 	
@@ -77,90 +67,101 @@ public class Controller {
 		System.out.println(HELP);
 	}
 	
-	public void moveUp() {
-		game.moveUp();
+	public void info() {
+		System.out.println("[Car] the racing car\n" +
+				"[Coin] gives 1 coin to the player\n" +
+				"[Obstacle] hits car\n");
 	}
 	
-	public void moveDown() {
-		game.moveDown();
+	public void exit() {
+		game.setExit(true);
+	}
+	
+	public void reset() {
+		game.reset();
 	}
 	
 	public void inputControl() {
 		advance = true;
+		char res = ' ';
 		
 		switch (input) {
 		case "h":
-		case "H":
 		case "help":
-		case "Help":
-			help();
 			advance = false;
+			help();
+			res = 'h';
 			break;
 		case "i":
-		case "I":
 		case "info":
-		case "Info":
-			//info();
+			info();
 			advance = false;
+			res = 'i';
 			break;
 		case "n":
-		case "N":
 		case "none":
-		case "None":
 		case "":
-			
+			res = ' ';
 			break;
 		case "q":
-		case "Q":
 		case "up":
-		case "Up":
 			if(game.getPlayerPositionY() > 0) {
-			moveUp();
+				res = 'q';
+				game.moveUp();
+			} else {
+				res = ' ';
 			}
+			
 			break;
 		case "a":
-		case "A":
 		case "down":
-		case "Down":
 			if(game.getPlayerPositionY() < game.getRoadWidth() - 1) {
-			moveDown();
+				res = 'a';
+				game.moveDown();
+			} else {
+				res = ' ';
 			}
+			
 			break;
 		case "e":
-		case "E":
 		case "exit":
-		case "Exit":
-			//exit();
+			exit();
+			res = 'e';
 			break;
 		case "r":
-		case "R":
 		case "reset":
-		case "Reset":
-			//reset();
+			reset();
+			res = 'r';
+			advance = false;
 			break;
 		case "t":
-		case "T":
 		case "test":
-		case "Test":
 			game.toggleTest();
+			advance = false;
+			res = 't';
 			break;
 		}
 		
-		
+		game.setCurrentCommand(res);
 	}
 
 	public void run() {
-		while (!crash && !end) {
+		while (!game.getCrash() && !game.getExit() && !game.getWin()) {
 			printGame();
 			input = userInput();
 			inputControl();
 			if (advance) {
 				game.advance();
-				checkCrash();
+				game.update();
 				checkEnd();
 			}
+			
+			if (game.getCrash() || game.getWin()) {
+				printGame();
+			}
+			game.incrementCycle();
 		}
-		System.out.println("Game Over");
+		System.out.println(printer.endMessage());
 	}
 
 }
