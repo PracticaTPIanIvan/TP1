@@ -1,7 +1,5 @@
 package es.ucm.tp1.logic;
 
-import java.util.Random;
-
 public class Obstacle {
 	
 	private int posX;
@@ -10,9 +8,10 @@ public class Obstacle {
 	
 	private int cont;
 	
+	private int resistance;
+	
 	private Game game;
 	
-	private Random random;
 	
 	public Obstacle(int posX, int posY, Game game) {
 		this.posX = posX;
@@ -28,3 +27,4 @@ public class Obstacle {
 		return posY;
 	}
 }
+
