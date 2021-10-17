@@ -1,5 +1,7 @@
 package es.ucm.tp1.view;
 
+import java.text.DecimalFormat;
+
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.Player;
 import es.ucm.tp1.utils.*;
@@ -25,7 +27,6 @@ public class GamePrinter {
 
 	private String margin;
 
-
 	private static final String CRASH_MSG = String.format("Player crashed!%n");
 
 	private static final String WIN_MSG = String.format("Player wins!%n");
@@ -41,7 +42,6 @@ public class GamePrinter {
 
 	public GamePrinter(Game game) {
 		this.game = game;
-		
 
 		margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 
@@ -61,11 +61,7 @@ public class GamePrinter {
 
 
 	private String getInfo() {
-	return "Distance: " + game.getPlayerPositionX() + "\n" +
-			"Coins: " + game.getPlayerCoins() + "\n" +
-			"Cicle: " + "0" + "\n" +
-			"Total Obstacles: " + game.getObstacleCounter() + "\n" +
-			"Total Coins: " + game.getCoinCounter() + "\n";
+		return game.getGameStatus();
 	}
 
 	
@@ -103,9 +99,17 @@ public class GamePrinter {
 		
 		String s = GAME_OVER_MSG;
 		
-		// TODO your code here
+		if (game.getWin()) {
+			s += " " + WIN_MSG;
+		} else if (game.getCrash()){
+			s+= " " + CRASH_MSG;
+		} else {
+			s+= " " + DO_EXIT_MSG;
+		}
+		
 		
 		return s;
 	}
 }
+
 
