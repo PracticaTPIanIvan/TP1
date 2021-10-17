@@ -1,7 +1,5 @@
 package es.ucm.tp1.logic;
 
-import java.util.Random;
-
 public class Coin {
 	private int posX;
 	
@@ -9,12 +7,13 @@ public class Coin {
 	
 	private Game game;
 	
-	private Random random;
+	private boolean alive;
 	
 	public Coin(int posX, int posY, Game game) {
 		this.posX = posX;
 		this.posY = posY;
 		this.game = game;
+		alive = true;
 	}
 	
 	public int getCoinPositionX() {
@@ -24,4 +23,13 @@ public class Coin {
 	public int getCoinPositionY() {
 		return posY;
 	}
+	
+	public boolean getState() {
+		return alive;
+	}
+	
+	public void setState(boolean state) {
+		alive = state;
+	}
 }
+
