@@ -9,7 +9,11 @@ public class Player {
 	
 	public Player(Game game) {
 		this.positionX = 0;
-		this.positionY = 1;
+		if(game.getRoadWidth() == 5) {
+			this.positionY = 2;
+		}else {
+			this.positionY = 1;
+		}
 		this.numCoins = 5;
 		this.game = game;
 		crash = false;
@@ -57,7 +61,11 @@ public class Player {
 	
 	public void reset() {
 		positionX = 0;
-		positionY = 1;
+		if(game.getRoadWidth() == 5) {
+			positionY = 2;
+		} else {
+			positionY = 1;
+		}
 		numCoins = 5;
 	}
 	
@@ -78,4 +86,3 @@ public class Player {
 		
 	}
 }
-
