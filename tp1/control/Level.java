@@ -21,8 +21,6 @@ public enum Level {
 		this.obstacleFrequency = obstacleFrequency;
 		this.coinFrequency = coinFrequency;
 	}
-
-	// TODO fill your code
 	
 	public int getLength() {
 		return length;
