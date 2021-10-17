@@ -4,11 +4,15 @@ public class Player {
 	private int positionX;
 	private int positionY;
 	private int numCoins;
+	private Game game;
+	private boolean crash;
 	
-	public Player() {
+	public Player(Game game) {
 		this.positionX = 0;
 		this.positionY = 1;
-		this.numCoins = 0;
+		this.numCoins = 5;
+		this.game = game;
+		crash = false;
 	}
 	
 	public int getPositionX() {
@@ -21,6 +25,44 @@ public class Player {
 	
 	public int getCoins() {
 		return numCoins;
+	}
+	
+	public boolean getCrash() {
+		return crash;
+	}
+	
+	public void checkCrash() {
+		if (game.obstaclePosition(game.getPlayerPositionX(), game.getPlayerPositionY()) != -1) {
+			game.setCrashTrue();
+		}
+	}
+	
+	public void checkCoinCollision() {
+		int coinPos = game.coinPosition(game.getPlayerPositionX(), game.getPlayerPositionY());
+		if (coinPos != -1) {
+			game.addNumCoins();
+			game.substractTotalCoins();
+			game.setState(false, coinPos);
+		}
+	}
+	
+	public void setCrashTrue() {
+		crash = true;
+	}
+	
+	public void update() {
+		checkCrash();
+		checkCoinCollision();
+	}
+	
+	public void reset() {
+		positionX = 0;
+		positionY = 1;
+		numCoins = 5;
+	}
+	
+	public void addNumCoins() {
+		numCoins++;
 	}
 	
 	public void advance() {
@@ -36,3 +78,4 @@ public class Player {
 		
 	}
 }
+
