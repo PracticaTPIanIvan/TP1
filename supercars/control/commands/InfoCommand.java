@@ -21,7 +21,9 @@ public class InfoCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		System.out.print("Available objects:");
-		// TODO add your code
+		System.out.println("[Car] the racing car\n" +
+				"[Coin] gives 1 coin to the player\n" +
+				"[Obstacle] hits car\n");
 		return false;
 	}
 
