@@ -56,4 +56,3 @@ public abstract class GameObject implements Collider {
 	// TODO add your code
 
 }
-
