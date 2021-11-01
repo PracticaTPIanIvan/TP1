@@ -1,10 +1,10 @@
-package es.ucm.tp1;
+package es.ucm.tp1.supercars;
 
 import java.util.Scanner;
 
-import es.ucm.tp1.control.Controller;
-import es.ucm.tp1.control.Level;
-import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.supercars.control.Controller;
+import es.ucm.tp1.supercars.control.Level;
+import es.ucm.tp1.supercars.logic.Game;
 
 public class SuperCars {
 
@@ -50,8 +50,8 @@ public class SuperCars {
 					System.out.println(SEED_INFO_MSG + seed);
 
 					Game game = new Game(seed, level); 
-					if( Level.TEST.equals(level))
-						game.toggleTest();
+					/*if( Level.TEST.equals(level))
+						game.toggleTest();*/
 					
 					Controller controller = new Controller(game, new Scanner(System.in));
 					controller.run();
