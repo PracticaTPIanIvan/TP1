@@ -16,13 +16,21 @@ public abstract class Command {
 		new HelpCommand(),
 		new InfoCommand(),
 		new UpdateCommand(),
+		new GoUpCommand(),
+		new GoDownCommand(),
+		new UpdateCommand()
 	};
 	/* @formatter:on */
 
 	public static Command getCommand(String[] commandWords, Level level) {
+		int i = 0;
+		System.out.println(commandWords[0]);
 		Command command = null;
-		// TODO Add your code
-		System.out.format("[ERROR]: %s%n%n", UNKNOWN_COMMAND_MSG);
+		while(command == null && i < AVAILABLE_COMMANDS.length) {
+			command = AVAILABLE_COMMANDS[i].parse(commandWords);
+			i++;
+		}
+		return command;
 	}
 
 	private final String name;
@@ -61,4 +69,3 @@ public abstract class Command {
 	// TODO Add your code
 
 }
-
