@@ -21,7 +21,15 @@ public class HelpCommand extends Command {
 	public boolean execute(Game game) {
 		StringBuilder buffer = new StringBuilder("Available commands:");
 
-		// TODO Add your code
+		buffer.append("Available commands: \n" +
+		"[h]elp: show this help \n" +
+		"[i]nfo: prints gameobjet info \n" +
+		"[n]one | []: update \n" +
+		"[q]: go up \n" +
+		"[a]: go down \n" +
+		"[e]xit: exit game \n" +
+		"[r]eset: reset game \n" +
+		"[t]est: enables test mode");
 
 		System.out.println(buffer.toString());
 
