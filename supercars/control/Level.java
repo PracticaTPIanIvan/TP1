@@ -1,6 +1,4 @@
-package es.ucm.tp1.control;
-
-import es.ucm.tp1.control.Level;
+package es.ucm.tp1.supercars.control;
 
 public enum Level {
 
