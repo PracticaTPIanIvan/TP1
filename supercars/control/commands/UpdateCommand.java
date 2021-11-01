@@ -18,7 +18,12 @@ public class UpdateCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		// TODO add your code
+		if(game.getPlayerPositionX() < game.getRoadLength()) {
+			game.advance();
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
