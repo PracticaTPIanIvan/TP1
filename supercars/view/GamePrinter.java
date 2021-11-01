@@ -1,10 +1,10 @@
-package es.ucm.tp1.view;
+package es.ucm.tp1.supercars.view;
 
 import java.text.DecimalFormat;
 
-import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.logic.Player;
-import es.ucm.tp1.utils.*;
+import es.ucm.tp1.supercars.logic.Game;
+import es.ucm.tp1.supercars.logic.gameobjects.Player;
+import es.ucm.tp1.supercars.utils.*;
 
 
 public class GamePrinter {
@@ -60,9 +60,9 @@ public class GamePrinter {
 	
 
 
-	private String getInfo() {
+	/*private String getInfo() {
 		return game.getGameStatus();
-	}
+	}*/
 
 	
 	@Override
@@ -71,7 +71,7 @@ public class GamePrinter {
 
 		// Game Status
 		
-		str.append(getInfo());
+		//str.append(getInfo());
 		
 		// Paint game
 
@@ -99,9 +99,9 @@ public class GamePrinter {
 		
 		String s = GAME_OVER_MSG;
 		
-		if (game.getWin()) {
+		if (game.isFinished()) {
 			s += " " + WIN_MSG;
-		} else if (game.getCrash()){
+		} else if (game.playerIsAlive()){
 			s+= " " + CRASH_MSG;
 		} else {
 			s+= " " + DO_EXIT_MSG;
@@ -111,4 +111,3 @@ public class GamePrinter {
 		return s;
 	}
 }
-
