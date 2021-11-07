@@ -51,9 +51,8 @@ public class Game {
 		exit = false;
 		firstLoop = true;
 		objectContainer = new GameObjectContainer();
-		cycle = 0;
+		cycle = -1;
 		GameObjectGenerator.generateGameObjects(this, level);
-		
 	}
 	
 	public int getPlayerPositionX() {
@@ -120,7 +119,10 @@ public class Game {
 	
 	public GameObject getObjectInPosition(int x, int y) {
 		int ind = objectPosition(x, y);
-		return objectContainer.getObject(ind);
+		if(ind != -1)
+			return objectContainer.getObject(ind);
+		else
+			return null;
 	}
 
 	public void moveUp() {
@@ -166,7 +168,11 @@ public class Game {
 	}
 	
 	public void reset() {
-		
+		for(int i = 0; i < objectContainer.getObjectCounter(); i++) {
+			objectContainer.setState(i, false);
+		}
+		deleteObjects();
+		GameObjectGenerator.reset(level);
 	}
 	
 	public void toggleTest() {
@@ -174,6 +180,30 @@ public class Game {
 	}
 	public boolean doCollision() {
 		return player.doCollision();
+	}
+	
+	public void deleteObjects() {
+		GameObject object;
+		GameObjectContainer aux = new GameObjectContainer();
+		for(int i = 0; i < getRoadWidth(); i++) {
+			object = getObjectInPosition(getPlayerPositionX() - 1, i);
+			if(object != null) {
+				object.onDelete();
+			}
+		}
+		for(int j = 0; j < objectContainer.getObjectCounter(); j++) {
+			if(objectContainer.getState(j)) {
+				aux.setNewObject(objectContainer.getObject(j));
+			}
+		}
+		objectContainer = aux;
+	}
+	
+	public int getContainerSize() {
+		for(int i = 0; i < objectContainer.getObjectCounter(); i++) {
+			System.out.println(objectContainer.getState(i));
+		}
+		return objectContainer.getObjectCounter();
 	}
 	
 	public void setExit() {
@@ -211,5 +241,9 @@ public class Game {
 		else {
 			return "";
 		}
+	}
+
+	public int getPlayersCoins() {
+		return player.getCoins();
 	}
 }
