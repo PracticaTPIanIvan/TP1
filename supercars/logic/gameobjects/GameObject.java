@@ -12,8 +12,6 @@ public abstract class GameObject implements Collider {
 	protected String symbol;
 	
 	protected boolean alive;
-	
-	public static int counter;
 
 	public GameObject(Game game, int x, int y) {
 		this.x = x;
@@ -47,10 +45,10 @@ public abstract class GameObject implements Collider {
 		return y;
 	}
 	
-	public int getCounter() {
-		return counter;
+	public void setState(boolean state) {
+		alive = state;
 	}
-
+	
 	public boolean isAlive() {
 		return alive;
 	}
@@ -60,5 +58,7 @@ public abstract class GameObject implements Collider {
 	public abstract void update();
 
 	public abstract void onDelete();
+	
+	public abstract int getCounter();
 
 }
