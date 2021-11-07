@@ -41,15 +41,12 @@ public class GamePrinter {
 
 	protected Game game;
 	
-	protected Player player;
-	
 	private long initialTime;
 	
 	private DecimalFormat df;
 
-	public GamePrinter(Game game, Player player) {
+	public GamePrinter(Game game) {
 		this.game = game;
-		this.player = player;
 		df = new DecimalFormat("#.##");
 
 		margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
@@ -79,8 +76,8 @@ public class GamePrinter {
 		}
 		seconds = (System.currentTimeMillis() - initialTime) / 1000.0;
 		
-		res += "Distance: " + (game.getRoadLength() - player.getPositionX()) + "\n" +
-				"Coins: " + player.getCoins() + "\n" +
+		res += "Distance: " + (game.getRoadLength() - game.getPlayerPositionX()) + "\n" +
+				"Coins: " + game.getPlayersCoins() + "\n" +
 				"Cycle: " + game.getCycle() + "\n" +
 				"Total Obstacles: " + Obstacle.counter + "\n" +
 				"Total Coins: " + Coin.counter ;
