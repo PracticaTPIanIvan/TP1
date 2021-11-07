@@ -12,6 +12,8 @@ public class GoDownCommand extends Command {
 
 	private static final String HELP = "go down";
 	
+	protected static final String ERROR = "Player can't move down";
+	
 	public GoDownCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
@@ -23,6 +25,7 @@ public class GoDownCommand extends Command {
 			game.update();
 			return true;
 		} else {
+			System.out.println(ERROR);
 			return false;
 		}
 	}
