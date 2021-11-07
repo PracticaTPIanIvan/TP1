@@ -46,8 +46,11 @@ public class Controller {
 	
 	public void run() {
 		while (!game.isFinished() && !game.getExit()){
-			game.incrementCycle();
-			if (advance) {
+			System.out.println(game.getContainerSize());
+			if(advance) {
+				game.incrementCycle();
+			}
+			if (advance || game.getTest()) {
 			printGame();
 			}
 			advance = false;
@@ -59,6 +62,7 @@ public class Controller {
 			if (command != null) {
 				advance = command.execute(game);
 				game.doCollision();
+				game.deleteObjects();
 			} else {
 				System.out.println("[ERROR]: "+ UNKNOWN_COMMAND_MSG);
 			}
