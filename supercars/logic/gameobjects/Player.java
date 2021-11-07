@@ -50,6 +50,10 @@ public class Player extends GameObject{
 		alive = false;
 	}
 	
+	public int getCounter() {
+		return 1;
+	}
+	
 	public boolean doCollision() {
 		Collider other = game.getObjectInPosition(getPositionX(), getPositionY());
 		if (other != null) {
