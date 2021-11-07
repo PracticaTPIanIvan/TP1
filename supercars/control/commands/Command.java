@@ -19,7 +19,8 @@ public abstract class Command {
 		new GoUpCommand(),
 		new GoDownCommand(),
 		new UpdateCommand(), 
-		new ExitCommand()
+		new ExitCommand(),
+		new TestCommand()
 	};
 	/* @formatter:on */
 
