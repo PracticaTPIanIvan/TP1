@@ -20,6 +20,12 @@ public class GameObjectContainer {
 	public GameObject getObject(int index) {
 		return gameobjects.get(index);
 	}
+	public boolean getState(int index) {
+		return gameobjects.get(index).isAlive();
+	}
+	public void setState(int index, boolean state) {
+		gameobjects.get(index).setState(state);
+	}
 	public void setNewObject(GameObject object) {
 		gameobjects.add(gameobjects.size(), object);
 	}
