@@ -32,8 +32,8 @@ public class Player extends GameObject{
 		
 	}
 	
-	public void addCoins() {
-		numCoins++;
+	public void addCoins(int coins) {
+		numCoins += coins;
 	}
 	
 	public void onEnter() {
@@ -67,6 +67,11 @@ public class Player extends GameObject{
 	}
 	
 	public boolean receiveCollision(Player player) {
+		return false;
+	}
+
+	@Override
+	public boolean receiveShoot() {
 		return false;
 	}
 }
