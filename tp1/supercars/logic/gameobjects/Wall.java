@@ -6,6 +6,8 @@ public class Wall extends GameObject{
 	
 	private int resistance;
 	
+	public static int counter;
+	
 	public Wall(Game game, int x, int y) {
 		super(game, x, y);
 		resistance = 3;
@@ -14,33 +16,47 @@ public class Wall extends GameObject{
 
 
 	public boolean doCollision() {
-		
-		return false;
+		return true;
 	}
 
 	public boolean receiveCollision(Player player) {
-		
+		player.onDelete();
 		return false;
 	}
 
 	public void onEnter() {
-		// TODO Auto-generated method stub
-		
+		counter++;
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		switch(resistance) {
+		case 0:
+			counter--;
+			onDelete();
+			break;
+		case 1:
+			symbol = "░";
+			break;
+		case 2:
+			symbol = "▒";
+			break;
+		}
 	}
 
 	public void onDelete() {
-		// TODO Auto-generated method stub
+		alive = false;
 		
 	}
 
 	public int getCounter() {
-		// TODO Auto-generated method stub
-		return 0;
+		return counter;
+	}
+
+
+	public boolean receiveShoot() {
+		resistance--;
+		update();
+		return true;
 	}
 
 }
