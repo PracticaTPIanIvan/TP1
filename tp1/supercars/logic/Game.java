@@ -7,6 +7,7 @@ import es.ucm.tp1.supercars.control.Level;
 import es.ucm.tp1.supercars.logic.gameobjects.GameObject;
 import es.ucm.tp1.supercars.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.supercars.logic.gameobjects.Player;
+import es.ucm.tp1.supercars.logic.actions.InstantAction;
 
 public class Game {
 	private Player player;
@@ -104,6 +105,14 @@ public class Game {
 	
 	public void setFirstLoop(boolean bool) {
 		firstLoop = bool;
+	}
+	
+	public boolean receiveShoot(int ind) {
+		return objectContainer.getObject(ind).receiveShoot();
+	}
+	
+	public void executeInstantAction(InstantAction action) {
+		action.execute(this);
 	}
 	
 	public void resetGame(Level level, long seed) {
