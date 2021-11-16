@@ -21,6 +21,7 @@ public class Coin extends GameObject {
 
 	public void onDelete() {
 		alive = false;
+		counter--;
 	}
 	
 	public int getCounter() {
@@ -37,9 +38,13 @@ public class Coin extends GameObject {
 	
 	@Override
 	public boolean receiveCollision(Player player) {
-		player.addCoins();
-		this.setState(false);
-		counter--;
+		player.addCoins(1);
+		
+		return false;
+	}
+
+	@Override
+	public boolean receiveShoot() {
 		return false;
 	}
 }
