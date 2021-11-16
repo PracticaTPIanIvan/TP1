@@ -1,6 +1,7 @@
 package es.ucm.tp1.supercars.control.commands;
 
 import es.ucm.tp1.supercars.logic.Game;
+import es.ucm.tp1.supercars.logic.actions.Shoot;
 
 public class ShootCommand extends Command{
 	private static final String NAME = "shoot";
@@ -17,8 +18,8 @@ public class ShootCommand extends Command{
 
 	@Override
 	public boolean execute(Game game) {
-		
-
-		return false;
+		Shoot shoot = new Shoot();
+		game.executeInstantAction(shoot);
+		return true;
 	}
 }
