@@ -20,8 +20,8 @@ public abstract class Command {
 		new GoDownCommand(),
 		new UpdateCommand(), 
 		new ExitCommand(),
-		new TestCommand(), 
-		new ResetCommand()
+		new TestCommand(),
+		new ShootCommand()
 	};
 	/* @formatter:on */
 
