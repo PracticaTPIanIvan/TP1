@@ -41,4 +41,11 @@ public class Obstacle extends GameObject {
 		return false;
 	}
 
+	@Override
+	public boolean receiveShoot() {
+		counter--;
+		onDelete();
+		return true;
+	}
+
 }
