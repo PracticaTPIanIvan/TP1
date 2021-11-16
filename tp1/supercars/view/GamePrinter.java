@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import es.ucm.tp1.supercars.logic.Game;
 import es.ucm.tp1.supercars.logic.gameobjects.Coin;
 import es.ucm.tp1.supercars.logic.gameobjects.Obstacle;
+import es.ucm.tp1.supercars.logic.gameobjects.SuperCoin;
+import es.ucm.tp1.supercars.logic.gameobjects.Wall;
 import es.ucm.tp1.supercars.utils.*;
 
 
@@ -89,8 +91,11 @@ public class GamePrinter {
 		res += "Distance: " + (game.getRoadLength() - game.getPlayerPositionX()) + "\n" +
 				"Coins: " + game.getPlayersCoins() + "\n" +
 				"Cycle: " + game.getCycle() + "\n" +
-				"Total Obstacles: " + Obstacle.counter + "\n" +
-				"Total Coins: " + Coin.counter ;
+				"Total Obstacles: " + (Obstacle.counter + Wall.counter) + "\n" +
+				"Total Coins: " + Coin.counter + " " + SuperCoin.coinPosX;
+		if(SuperCoin.superCoinIsPresent(game.getPlayerPositionX(), game.getVisibility())) {
+			res += "\n Supercoin is present \n";
+		}
 		
 		if (!game.getTest()) {
 			res +=  "\n" + "Ellapsed time: ";
