@@ -19,9 +19,10 @@ public class GoUpCommand extends Command {
 	}
 	
 	public boolean execute(Game game) {
-		if(game.getPlayerPositionY() > 0 && game.getPlayerPositionX() <= game.getRoadLength()) {
+		if(game.getPlayerPositionY() > 0 && game.getPlayerPositionX() < game.getRoadLength()) {
 			game.moveUp();
 			game.update();
+			game.incrementCycle();
 			return true;
 		} else {
 			System.out.println(ERROR);
