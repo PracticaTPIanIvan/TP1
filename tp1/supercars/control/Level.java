@@ -71,4 +71,8 @@ public enum Level {
 		}
 		return buffer.toString();
 	}
+
+	public double advancedObjectsFrequency() {
+		return advObjFreq;
+	}
 }
