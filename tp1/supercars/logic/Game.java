@@ -55,7 +55,7 @@ public class Game {
 		reset = false;
 		firstLoop = true;
 		objectContainer = new GameObjectContainer();
-		cycle = -1;
+		cycle = 0;
 		GameObjectGenerator.generateGameObjects(this, level);
 	}
 	
@@ -255,23 +255,21 @@ public class Game {
 	}
 	
 	public String positionToString(int j, int i) { 
-		
+		String icon = "";
 		if(j == player.getPositionX() && i == player.getPositionY()) {
 			if (player.isAlive()) {
-				return PLAYER_ICON;
+				icon += PLAYER_ICON;
 			} else {
-				return DEAD_PLAYER;
+				icon += DEAD_PLAYER;
 			}
 		}
-		else if(objectPosition(j, i) != -1) {
-			return  objectContainer.toString(objectPosition(j, i));
+		if(objectPosition(j, i) != -1) {
+			icon += objectContainer.toString(objectPosition(j, i));
 		}
-		else if (j == getRoadLength()) {
-			return FINISH_LINE;
+		if (j == getRoadLength()) {
+			icon += FINISH_LINE;
 		}
-		else {
-			return "";
-		}
+		return icon;
 	}
 
 	public int getPlayersCoins() {
