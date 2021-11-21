@@ -36,6 +36,10 @@ public class Player extends GameObject{
 		numCoins += coins;
 	}
 	
+	public void advancePositions(int pos) {
+		x += pos;
+	}
+	
 	public void onEnter() {
 		
 	}
