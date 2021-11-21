@@ -5,6 +5,7 @@ import es.ucm.tp1.supercars.logic.gameobjects.Coin;
 import es.ucm.tp1.supercars.logic.gameobjects.Obstacle;
 import es.ucm.tp1.supercars.logic.gameobjects.Wall;
 import es.ucm.tp1.supercars.logic.gameobjects.SuperCoin;
+import es.ucm.tp1.supercars.logic.gameobjects.Turbo;
 
 public class GameObjectGenerator {
 	
@@ -21,6 +22,7 @@ public class GameObjectGenerator {
 				if(!SuperCoin.created) {
 					game.tryToAddObject(new SuperCoin(game, x, game.getRandomLane()), level.advancedObjectsFrequency());
 				}
+				game.tryToAddObject(new Turbo(game, x, game.getRandomLane()), level.advancedObjectsFrequency());
 			}
 		}
 	}
