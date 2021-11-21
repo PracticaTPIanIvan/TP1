@@ -20,6 +20,7 @@ public class ShootCommand extends Command{
 	public boolean execute(Game game) {
 		Shoot shoot = new Shoot();
 		game.executeInstantAction(shoot);
+		game.incrementCycle();
 		return true;
 	}
 }
