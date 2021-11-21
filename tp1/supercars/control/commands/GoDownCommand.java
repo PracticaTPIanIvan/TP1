@@ -20,9 +20,10 @@ public class GoDownCommand extends Command {
 	
 	public boolean execute(Game game) {
 		if(game.getPlayerPositionY() < game.getRoadWidth() - 1
-				&& game.getPlayerPositionX() <= game.getRoadLength()) {
+				&& game.getPlayerPositionX() < game.getRoadLength()) {
 			game.moveDown();
 			game.update();
+			game.incrementCycle();
 			return true;
 		} else {
 			System.out.println(ERROR);
