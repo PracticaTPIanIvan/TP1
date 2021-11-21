@@ -21,7 +21,8 @@ public abstract class Command {
 		new UpdateCommand(), 
 		new ExitCommand(),
 		new TestCommand(),
-		new ShootCommand()
+		new ShootCommand(),
+		new ClearCommand()
 	};
 	/* @formatter:on */
 
