@@ -2,6 +2,7 @@ package es.ucm.tp1.supercars.control.commands;
 
 import es.ucm.tp1.supercars.logic.Game;
 import es.ucm.tp1.supercars.utils.StringUtils;
+import es.ucm.tp1.supercars.view.GamePrinter;
 
 public class InfoCommand extends Command {
 
@@ -19,10 +20,10 @@ public class InfoCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		System.out.println("Available objects:");
+		System.out.print("Available objects:");
 		System.out.println("[Car] the racing car\n" +
 				"[Coin] gives 1 coin to the player\n" +
-				"[Obstacle] hits car");
+				"[Obstacle] hits car\n");
 		return false;
 	}
 
