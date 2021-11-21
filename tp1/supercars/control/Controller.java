@@ -13,7 +13,7 @@ public class Controller {
 	
 	private String input;
 	
-	private boolean advance;
+	private boolean display;
 	
 	private Game game;
 
@@ -25,7 +25,7 @@ public class Controller {
 		this.game = game;
 		this.scanner = scanner;
 		printer = new GamePrinter(game);
-		advance = true;
+		display = true;
 	}
 	
 	public void printGame() {
@@ -63,16 +63,13 @@ public class Controller {
 	public void run() {
 		while (!game.isFinished() && !game.getExit() && game.playerIsAlive()){
 			
-			if(advance) {
-				game.incrementCycle();
-			}
-			if (advance || game.getTest() || game.getReset()) {
+			if (display) {
 			printGame();
 			}
 			if (game.getReset()) {
 				game.setReset(false);
 			}
-			advance = false;
+			display = false;
 			System.out.println(PROMPT);
 			String s = scanner.nextLine();
 			String[] parameters = s.trim().split(" ");
@@ -81,8 +78,9 @@ public class Controller {
 				parameters[i] = parameters[i].toLowerCase();
 			}
 			Command command = Command.getCommand(parameters, game.getLevel());
-			if (command != null) {
-				advance = command.execute(game);
+			game.doCollision();
+			if (command != null && game.playerIsAlive()) {
+				display = command.execute(game);
 				if (!game.getReset()) {
 					game.doCollision();
 					game.deleteObjects();
