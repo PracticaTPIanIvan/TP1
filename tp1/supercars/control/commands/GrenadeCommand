@@ -1,17 +1,37 @@
-package es.ucm.tp1.supercars.logic.actions;
+package es.ucm.tp1.supercars.control.commands;
 
 import es.ucm.tp1.supercars.logic.Game;
 
-public class ExplosionAction implements InstantAction{
+public class GrenadeCommand extends Command{
+	private static final String NAME = "grenade";
 
-	public void execute(Game game) {
-		int pos = game.objectPosition(game.getPlayerPositionX() + x, game.getPlayerPositionY());
-		for(int i = -1; i <= 1; i++) {
-			for(int j = -1; j <= 1; j++) {
-				while()
+	private static final String DETAILS = "[g]renade";
+
+	private static final String SHORTCUT = "g";
+
+	private static final String HELP = "add a grenade in position x, y";
+
+	public GrenadeCommand() {
+		super(NAME, SHORTCUT, DETAILS, HELP);
+	}
+
+	@Override
+	public boolean execute(Game game) {
+		
+		return true;
+	}
+	
+	protected Command parse(String[] words) {
+		if (matchCommandName(words[0])) {
+			if (words.length != 3) {
+				System.out.format("[ERROR]: Command %s: %s%n%n", NAME, INCORRECT_NUMBER_OF_ARGS_MSG);
+				return null;
+			} else {
+				
+				return this;
 			}
 		}
-		
+		return null;
 	}
 
 }
