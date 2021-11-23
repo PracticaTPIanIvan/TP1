@@ -139,6 +139,10 @@ public class Game {
 			return 1;
 	}
 	
+	public void setAdvance(int ind) {
+		objectContainer.getObject(ind).advance();
+	}
+	
 	public int objectPosition(int j, int i) {
 		int pos = -1;
 		for(int k = 0; k < objectContainer.getObjectCounter(); k++) {
@@ -148,6 +152,14 @@ public class Game {
 			}
 		}
 		return pos;
+	}
+	
+	public int getObjectX(int i) {
+		return objectContainer.getObjectPositionX(i);
+	}
+	
+	public int getObjectY(int i) {
+		return objectContainer.getObjectPositionY(i);
 	}
 	
 	public GameObject getObjectInPosition(int x, int y) {
