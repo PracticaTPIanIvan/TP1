@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "mainClass": "tp1.SuperCars",
+            "mainClass": "es.ucm.tp1.supercars.SuperCars",
             "args": [
                 "advanced",
                 "100"
