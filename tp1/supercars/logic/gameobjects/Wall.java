@@ -30,4 +30,8 @@ public class Wall extends Obstacle{
 		return true;
 	}
 
+	public String getSerialInfo() {
+		return Integer.toString(resistance);
+	}
+	
 }
