@@ -65,5 +65,13 @@ public class Pedestrian extends Obstacle{
 		}
 	}
 
+	public String getSerialInfo() {
+		if(upwards) {
+			return "up";
+		}
+		else {
+			return "down";
+		}
+	}
+	
 }
-
