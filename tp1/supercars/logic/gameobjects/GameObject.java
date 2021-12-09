@@ -57,6 +57,10 @@ public abstract class GameObject implements Collider {
 		x++;
 	}
 	
+	public String getSerialInfo() {
+		return "";
+	}
+	
 	public void receiveWave() {
 		incrementX();
 	}
