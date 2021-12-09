@@ -63,4 +63,8 @@ public class Grenade extends GameObject{
 		return 0;
 	}
 	
+	public String getSerialInfo() {
+		return Integer.toString(countDown);
+	}
+	
 }
