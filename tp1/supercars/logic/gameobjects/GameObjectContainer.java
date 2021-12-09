@@ -219,6 +219,15 @@ public class GameObjectContainer {
 		}
 	}
 	
+	public String getSerialInfo(int ind) {
+		String s = "";
+		s += gameobjects.get(ind).getSymbol() + " (" + gameobjects.get(ind).getX() + ", "
+				+ gameobjects.get(ind).getY() + ")" + " " + gameobjects.get(ind).getSerialInfo();
+		return s;
+	}
+	
+	
+	
 	public void removeDead() {
 		List<GameObject> aux = new ArrayList<>();
 		
