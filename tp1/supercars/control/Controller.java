@@ -1,8 +1,10 @@
 package es.ucm.tp1.supercars.control;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 import es.ucm.tp1.supercars.control.commands.Command;
+import es.ucm.tp1.supercars.control.exceptions.GameException;
 import es.ucm.tp1.supercars.logic.Game;
 import es.ucm.tp1.supercars.view.GamePrinter;
 
@@ -10,8 +12,6 @@ public class Controller {
 	private static final String PROMPT = "Command > ";
 
 	private boolean display;
-	
-	private boolean firstLoop;
 	
 	private Game game;
 
@@ -23,7 +23,6 @@ public class Controller {
 		this.game = game;
 		this.scanner = scanner;
 		printer = new GamePrinter(game);
-		firstLoop = true;
 		display = true;
 	}
 	
@@ -57,12 +56,14 @@ public class Controller {
 		Long seed = game.getSeed();
 		game.resetGame(level, seed);
 		printer.reset();
-		firstLoop = true;
+		game.setFirstLoop(false);
 	}
 	
 	
 	
 	public void run() { 
+		//System.out.format(Locale.FRANCE, "%10.2f", piVal);
+		//new Locale("es", "ES");
 		while (!game.isFinished() && !game.getExit() && game.playerIsAlive()){
 			
 			if (display) {
@@ -81,28 +82,35 @@ public class Controller {
 				parameters[i] = parameters[i].toLowerCase();
 			}
 			
-			Command command = Command.getCommand(parameters, game.getLevel());
-			game.doCollision();
-			if (command != null && game.playerIsAlive()) {
+			try {
+				Command command = Command.getCommand(parameters, game.getLevel());
 				display = command.execute(game);
-				game.removeDead();
-				if (!game.getReset() && command.mustUpdateGame()) {
-					game.doCollision();
-					game.update();
-					game.deleteObjects();
-				} else if (game.getReset()) {
-					reset();
-				}
-				
-				if (command.mustUpdateGame() && !firstLoop) {
-					game.generateRuntimeObjects();
-				}
-				
-			} 
-
-			if (firstLoop) {
-				firstLoop = false;
 			}
+			catch(GameException ex) {
+				System.out.format(ex.getMessage() + "%n%n");
+			}
+			
+			if (command != null && game.playerIsAlive()) {
+			game.doCollision();
+			game.removeDead();
+			if (!game.getReset() && command.mustUpdateGame()) {
+				game.doCollision();
+				game.update();
+				game.deleteObjects();
+			} else if (game.getReset()) {
+				reset();
+			}
+			
+			if (command.mustUpdateGame() && !game.getFirstLoop()) {
+				game.generateRuntimeObjects();
+			}
+			
+		} 
+
+		if (game.getFirstLoop()) {
+			game.setFirstLoop(false);
+		}
+			
 		}
 		if (game.isFinished() || !game.playerIsAlive()) {
 			game.update();
